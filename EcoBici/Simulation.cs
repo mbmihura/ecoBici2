@@ -10,11 +10,28 @@ namespace EcoBici
     {
         TimeSpan[][] TC;
         TimeSpan[] TPLL;
-        TimeSpan T;
+        
 
+        TimeSpan Ti;
+        TimeSpan Tf;
+        int amountOfBicycles;
+        int amountOfStations;
+        BikeDistributionStrategy distributionStrategy;
 
-        public Simulation(int amountOfBicycles, int amountOfStations)
+        public Simulation(int amountOfBicycles, int amountOfStations, BikeDistributionStrategy distributionStrategy, TimeSpan Tf)
+            : this(amountOfBicycles, amountOfStations, distributionStrategy, Tf, new TimeSpan(0))
+        {}
+
+        public Simulation(int amountOfBicycles, int amountOfStations, BikeDistributionStrategy distributionStrategy, TimeSpan Tf, TimeSpan Ti)
         {
+            this.Ti = Ti;
+            this.Tf = Tf;
+            this.amountOfBicycles = amountOfBicycles;
+            this.amountOfStations = amountOfStations;
+            this.distributionStrategy = distributionStrategy;
+            
+            // TODO: Set initial bikes distribution;
+
             //TC = new byte?[amountOfStations, amountOfBicycles];
 
             ////Bicycles distribution stategy:
@@ -37,8 +54,7 @@ namespace EcoBici
         
         public void Run()
         {
-            TimeSpan Ti = new TimeSpan(0);
-            TimeSpan Tf = new TimeSpan(9, 0, 0);
+            TimeSpan T;
             TimeSpan HV = new TimeSpan(24,0,0);
             int e;
             int d;
