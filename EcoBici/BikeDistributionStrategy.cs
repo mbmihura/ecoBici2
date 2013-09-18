@@ -5,7 +5,11 @@ using System.Text;
 
 namespace EcoBici
 {
-    class BikeDistributionStrategy
+    public class BikeDistributionStrategy : EcoBici.IBikeDistributionStrategy
     {
+        public TimeSpan[][] Distribute(int amountOfBicycles, int amountOfStations)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

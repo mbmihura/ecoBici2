@@ -16,7 +16,7 @@ namespace EcoBici
         TimeSpan Tf;
         int amountOfBicycles;
         int amountOfStations;
-        BikeDistributionStrategy distributionStrategy;
+        IBikeDistributionStrategy distributionStrategy;
 
         public Simulation(int amountOfBicycles, int amountOfStations, BikeDistributionStrategy distributionStrategy, TimeSpan Tf)
             : this(amountOfBicycles, amountOfStations, distributionStrategy, Tf, new TimeSpan(0))
@@ -31,6 +31,7 @@ namespace EcoBici
             this.distributionStrategy = distributionStrategy;
             
             // TODO: Set initial bikes distribution;
+            TC = distributionStrategy.Distribute(amountOfBicycles, amountOfStations);
 
             //TC = new byte?[amountOfStations, amountOfBicycles];
 
