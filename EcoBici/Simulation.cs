@@ -33,7 +33,7 @@ namespace EcoBici
 
             // Set initial bikes distribution and TPLL;
             TPLL = iAInitStrategy.getSimulationInitialTPLL(amountOfStations, Ti);
-            TC = distributionStrategy.Distribute(amountOfBicycles, amountOfStations);
+            TC = distributionStrategy.Distribute(amountOfStations, amountOfBicycles);
         }
         
         public void Run()
@@ -76,17 +76,16 @@ namespace EcoBici
             // TODO: print results.
         }
 
-        
-
         /// <summary>
-        /// 
+        /// Gets the index of the minimum element in the array.
         /// </summary>
-        /// <param name="array"></param>
-        /// <exception cref=""
-        /// <returns></returns>
+        /// <param name="array">TimeSpan array in which to search for the minimum value.</param>
+        /// <exception cref="System.OverflowException">The array is multidimensional and contains more than System.Int32.MaxValue elements.</exception>
+        /// <exception cref="System.IndexOutOfRangeException">The array length should be at least 1.</exception>
+        /// <returns>Index of the minimum element in the array.</returns>
         private int min(TimeSpan[] array)
         {
-            int minIndex = 1; TimeSpan minValue = array[1];
+            int minIndex = 0; TimeSpan minValue = array[0];
             for (int e = 1; e < array.Length; e++)
             {
                 if (array[e] < minValue)

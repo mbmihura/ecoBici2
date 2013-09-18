@@ -15,7 +15,7 @@ namespace EcoBici
             this.HV = HV;
         }
 
-        public TimeSpan[][] Distribute(int amountOfBicycles, int amountOfStations)
+        public TimeSpan[][] Distribute(int amountOfStations, int amountOfBicycles)
         {
             TimeSpan[][] dist = new TimeSpan[amountOfStations][];
 
