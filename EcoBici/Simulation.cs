@@ -16,6 +16,7 @@ namespace EcoBici
         int amountOfBicycles;
         int amountOfStations;
         IBikeDistributionStrategy distributionStrategy;
+        IIAInitalizeStrategy iAInitStrategy;
 
         public Simulation(int amountOfBicycles, int amountOfStations, UniformDistribution distributionStrategy, TimeSpan Tf)
             : this(amountOfBicycles, amountOfStations, distributionStrategy, Tf, new TimeSpan(0))
@@ -28,8 +29,10 @@ namespace EcoBici
             this.amountOfBicycles = amountOfBicycles;
             this.amountOfStations = amountOfStations;
             this.distributionStrategy = distributionStrategy;
+            this.iAInitStrategy = new ArrivalsAtSimulationInitStrategy();
 
-            // Set initial bikes distribution;
+            // Set initial bikes distribution and TPLL;
+            TPLL = iAInitStrategy.getSimulationInitialTPLL(amountOfStations, Ti);
             TC = distributionStrategy.Distribute(amountOfBicycles, amountOfStations);
         }
         
