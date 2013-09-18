@@ -104,6 +104,72 @@ namespace EcoBici
         /// <returns>A time interval of set of possible different values. Each of the timespans returned are subject to a probability which varies from station to station.</returns>
         public TimeSpan IA(int e)
         {
+            string connectString = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
+
+            //System.Data.SqlClient.SqlConnection myConnection = new System.Data.SqlClient.SqlConnection("user id=username;" + 
+            //                           "password=password;server=serverurl;" + 
+            //                           "Trusted_Connection=yes;" + 
+            //                           "database=database; " + 
+            //                           "connection timeout=30");
+            //try
+            //{
+            //    myConnection.Open();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(e.ToString());
+
+            //}
+
+            //using (System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(connectString))
+            //using (System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("dbo.usp_InsertContract", conn))
+            //{
+            //    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            //    // set up the parameters
+            //    cmd.Parameters.Add("@ContractNumber", System.Data.SqlDbType.VarChar, 7);
+            //    cmd.Parameters.Add("@NewId", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
+
+            //    // set parameter values
+            //    cmd.Parameters["@ContractNumber"].Value = 4;
+
+            //    // open connection and execute stored procedure
+            //    conn.Open();
+            //    cmd.ExecuteNonQuery();
+
+            //    // read output value from @NewId
+            //    int contractID = Convert.ToInt32(cmd.Parameters["@NewId"].Value);
+            //    conn.Close();
+            //}
+
+
+
+            ////using (Client oda = new Client(Aula365.Common.General.GetAula365Dsn()))
+            ////{
+            ////    oda.AddParameter("@PostId", postId);
+            ////    oda.AddParameter("@MovieId", movieId);
+            ////    oda.AddParameter("@PillId", pillId);
+            ////    oda.AddParameter("@BriefId", briefId);
+            ////    oda.AddParameter("@InfographyId", infographyId);
+            ////    oda.AddParameter("@BiographyId", biographyId);
+            ////    if (publishStatus != ePublishStatus.Any)
+            ////        oda.AddParameter("@PubStatus", (int)publishStatus);
+            ////    DataTable dt = oda.GetDatasetFromStored("GSL_CommentsPost_GetIdListForObjects").Tables[0];
+            ////    if (dt.Rows.Count != 0)
+            ////    {
+            ////        rv = dt.Rows.Cast<DataRow>().Select(o => o.Field<long>("id")).ToList();
+            ////    }
+            ////}
+
+            //try
+            //{
+            //    myConnection.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(e.ToString());
+            //}
+            //// TODO:
             return new TimeSpan(1000);
         }
 
