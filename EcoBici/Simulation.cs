@@ -11,14 +11,13 @@ namespace EcoBici
         TimeSpan[][] TC;
         TimeSpan[] TPLL;
         
-
         TimeSpan Ti;
         TimeSpan Tf;
         int amountOfBicycles;
         int amountOfStations;
         IBikeDistributionStrategy distributionStrategy;
 
-        public Simulation(int amountOfBicycles, int amountOfStations, BikeDistributionStrategy distributionStrategy, TimeSpan Tf)
+        public Simulation(int amountOfBicycles, int amountOfStations, UniformDistribution distributionStrategy, TimeSpan Tf)
             : this(amountOfBicycles, amountOfStations, distributionStrategy, Tf, new TimeSpan(0))
         {}
 
