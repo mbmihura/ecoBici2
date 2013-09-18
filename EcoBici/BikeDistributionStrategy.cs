@@ -7,16 +7,9 @@ namespace EcoBici
 {
     public class UniformDistribution : EcoBici.IBikeDistributionStrategy
     {
-        TimeSpan Ti;
-        TimeSpan HV;
-       
-        public UniformDistribution(TimeSpan Ti, TimeSpan HV) {
-            this.Ti = Ti;
-            this.HV = HV;
-        }
-
-        public TimeSpan[][] Distribute(int amountOfStations, int amountOfBicycles)
+        public TimeSpan[][] Distribute(int amountOfStations, int amountOfBicycles, TimeSpan Ti, TimeSpan HV)
         {
+
             TimeSpan[][] dist = new TimeSpan[amountOfStations][];
 
             int bikesPerStation = amountOfBicycles / amountOfStations;

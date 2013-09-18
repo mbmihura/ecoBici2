@@ -13,6 +13,7 @@ namespace EcoBici
         
         TimeSpan Ti;
         TimeSpan Tf;
+        TimeSpan HV;
         int amountOfBicycles;
         int amountOfStations;
         IBikeDistributionStrategy distributionStrategy;
@@ -26,6 +27,7 @@ namespace EcoBici
         {
             this.Ti = Ti;
             this.Tf = Tf;
+            this.HV = Tf - Ti + new TimeSpan(24, 0, 0);
             this.amountOfBicycles = amountOfBicycles;
             this.amountOfStations = amountOfStations;
             this.distributionStrategy = distributionStrategy;
@@ -33,13 +35,12 @@ namespace EcoBici
 
             // Set initial bikes distribution and TPLL;
             TPLL = iAInitStrategy.getSimulationInitialTPLL(amountOfStations, Ti);
-            TC = distributionStrategy.Distribute(amountOfStations, amountOfBicycles);
+            TC = distributionStrategy.Distribute(amountOfStations, amountOfBicycles, Ti, HV);
         }
         
         public void Run()
         {
             TimeSpan T;
-            TimeSpan HV = new TimeSpan(24,0,0);
             int e;
             int d;
             int b;
@@ -103,7 +104,6 @@ namespace EcoBici
         /// <returns>A time interval of set of possible different values. Each of the timespans returned are subject to a probability which varies from station to station.</returns>
         public TimeSpan IA(int e)
         {
-            // TODO:
             return new TimeSpan(1000);
         }
 
