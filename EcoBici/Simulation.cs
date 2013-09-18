@@ -22,35 +22,16 @@ namespace EcoBici
             : this(amountOfBicycles, amountOfStations, distributionStrategy, Tf, new TimeSpan(0))
         {}
 
-        public Simulation(int amountOfBicycles, int amountOfStations, BikeDistributionStrategy distributionStrategy, TimeSpan Tf, TimeSpan Ti)
+        public Simulation(int amountOfBicycles, int amountOfStations, IBikeDistributionStrategy distributionStrategy, TimeSpan Tf, TimeSpan Ti)
         {
             this.Ti = Ti;
             this.Tf = Tf;
             this.amountOfBicycles = amountOfBicycles;
             this.amountOfStations = amountOfStations;
             this.distributionStrategy = distributionStrategy;
-            
-            // TODO: Set initial bikes distribution;
+
+            // Set initial bikes distribution;
             TC = distributionStrategy.Distribute(amountOfBicycles, amountOfStations);
-
-            //TC = new byte?[amountOfStations, amountOfBicycles];
-
-            ////Bicycles distribution stategy:
-
-            //// TODO: If needed, improve performance by precomputing
-            //Action a = () =>
-            //{
-            //    int remainingBikes = amountOfBicycles;
-            //    for (int bic = 0; bic < TC.GetLength(1); ++bic)
-            //    {
-            //        for (int est = 0; est < TC.GetLength(0); ++est)
-            //        {
-            //            TC[est, bic] = 0;
-            //            if (--remainingBikes == 0)
-            //                return;
-            //        }
-            //    }
-            //};
         }
         
         public void Run()
