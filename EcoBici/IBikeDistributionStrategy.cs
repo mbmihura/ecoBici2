@@ -1,7 +1,7 @@
 ﻿using System;
 namespace EcoBici
 {
-    interface IBikeDistributionStrategy
+    public interface IBikeDistributionStrategy
     {
         TimeSpan[][] Distribute(int amountOfBicycles, int amountOfStations);
     }
