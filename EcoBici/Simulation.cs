@@ -70,7 +70,7 @@ namespace EcoBici
                     TC[e][b] = HV;
                     TC[d][b] = T + tv;              
                 }
-            } while ( T > Tf);
+            } while ( T < Tf);
             
             // TODO: calc results.
 
