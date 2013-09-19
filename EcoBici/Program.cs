@@ -34,24 +34,26 @@ namespace EcoBici
             Console.Write("Creating simulation...");
             var Ti = new TimeSpan(0);
             var Tf = new TimeSpan(8, 0, 0);
-            Console.WriteLine("OK");
-            Console.WriteLine("");
+            Simulation simulation = new Simulation(10, 5, new UniformDistribution(), Tf, Ti);
+            Console.WriteLine("OK" + Environment.NewLine);
 
             // Run simulation
             Console.Write("Running simulation...");
-            new Simulation(10, 5, new UniformDistribution(), Tf, Ti).Run();
-            Console.WriteLine("OK");
+            simulation.Run();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Form results = new Form1(simulation);
+            Console.WriteLine("OK" + Environment.NewLine);
 
-            // load GUI and Results
+            // Load GUI and Results
             Console.Write("Loading GUI and Results...");
 
             // Deallocate Console
             Console.Write("Exiting command interface...");
             NativeMethods.FreeConsole();
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            // Display GUI
+            Application.Run(results);
         }
     }
 
