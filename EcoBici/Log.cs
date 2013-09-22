@@ -52,7 +52,7 @@ namespace EcoBici
                 Write(" ");
             }
             //Write("                                                                                                    ");
-            WriteLine("   __Time__  Est  NextTPLL  NextEst  min B  ____TC (a futuro)_____");
+            WriteLine("   __Time__  Est  NextTPLL  EstDest  min B  ____TC (a futuro)_____");
             StringBuilder s = new StringBuilder(String.Format("{0,"+ EstimatedAmountSimulatiosTens +"}", nState++) + "|"); 
             for (int row = 0; row < TC.Length; row++)
             {
