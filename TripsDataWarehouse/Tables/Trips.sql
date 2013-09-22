@@ -1,4 +1,0 @@
-﻿CREATE TABLE [dbo].[Trips]
-(
-	[Id] INT NOT NULL PRIMARY KEY
-)

@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{aa996a7f-03b9-43b2-9cb2-5ef123189616}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureDatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -53,10 +53,23 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="Tables" />
+    <Folder Include="EcoBici" />
+    <Folder Include="EcoBici\Tables" />
+    <Folder Include="EcoBici\Views" />
+    <Folder Include="EcoBici\Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="EcoBici.sql" />
-    <Build Include="Tables\Trips.sql" />
+    <Build Include="EcoBici\Tables\TVTable.sql" />
+    <Build Include="EcoBici\Tables\IATable.sql" />
+    <Build Include="EcoBici\Tables\EDTable.sql" />
+    <Build Include="EcoBici\Views\RandomV.sql" />
+    <Build Include="EcoBici\Functions\TV.sql" />
+    <Build Include="EcoBici\Functions\IA.sql" />
+    <Build Include="EcoBici\Functions\ED.sql" />
+    <Build Include="EcoBici\Tables\Trips.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TripsDataWarehouse.publish.xml" />
   </ItemGroup>
 </Project>
