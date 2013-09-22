@@ -70,6 +70,8 @@
     <Build Include="EcoBici\Functions\ED.sql" />
     <Build Include="EcoBici\Tables\Trips.sql" />
     <Build Include="EcoBici\Stored Procedures\InsertIA.sql" />
+    <Build Include="EcoBici\Stored Procedures\InsertED.sql" />
+    <Build Include="EcoBici\Stored Procedures\InsertTV.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TripsDataWarehouse.publish.xml" />
