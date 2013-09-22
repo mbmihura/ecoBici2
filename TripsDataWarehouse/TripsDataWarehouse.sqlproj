@@ -72,6 +72,8 @@
     <Build Include="EcoBici\Stored Procedures\InsertIA.sql" />
     <Build Include="EcoBici\Stored Procedures\InsertED.sql" />
     <Build Include="EcoBici\Stored Procedures\InsertTV.sql" />
+    <Build Include="EcoBici\Stored Procedures\GenerateFDPs.sql" />
+    <Build Include="EcoBici\Stored Procedures\LoadTripsFromCSVFile.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TripsDataWarehouse.publish.xml" />
