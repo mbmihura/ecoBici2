@@ -27,14 +27,14 @@ namespace EcoBici
 
             // Ask for a value for profile's not settted variable
             Console.Write("Amount of bicycles: ");
-            Console.ReadLine();
+            int b = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("");
 
             // Create simulation
             Console.Write("Creating simulation...");
             var Ti = new TimeSpan(0);
-            var Tf = new TimeSpan(8, 0, 0);
-            Simulation simulation = new Simulation(10, 5, new UniformDistribution(), Tf, Ti);
+            var Tf = new TimeSpan(4, 0, 0);
+            Simulation simulation = new Simulation(b, 3, new UniformDistribution(), Tf, Ti);
             Console.WriteLine("OK" + Environment.NewLine);
 
             // Run simulation
