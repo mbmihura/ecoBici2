@@ -44,32 +44,47 @@ namespace EcoBici
             int e;
             int d;
             int b;
+            TimeSpan tc;
             TimeSpan tv;
 
+            Log.HV = this.HV;
+            Log.BikesAmount = this.amountOfBicycles;
+            Log.setColumnNumbers();
+            Log log;
             do
             {
+                log = new Log();
+
                 e = min(TPLL);
+                log.SetState(TC);
                 T = TPLL[e];
+
+                
 
                 TPLL[e] = T + IA(e);
 
                 d = ED(e);
                 tv = TV(e, d);
 
-                b = min(TC[e]);
 
-                if (T < TC[e][b])
+
+                b = min(TC[e]);
+                tc = TC[e][b];
+
+                TC[e][b] = HV;
+                if (T < tc)
                 {
-                    // No more bikes
-                    TC[e][b] = TC[e][b] + tv;
-                    TC[d][b] = HV;
- 
+                    // No more bikes.
+                    TC[d][b] = tc + tv;
+                    log.SetTCAnt(tc);
                 }
                 else {
                     // Bike available
-                    TC[e][b] = HV;
-                    TC[d][b] = T + tv;              
+                    TC[d][b] = T + tv;
+                    log.SetT(T);
                 }
+
+                log.WriteState(T, e, TPLL, d, b);
             } while ( T < Tf);
             
             // TODO: calc results.
@@ -104,7 +119,7 @@ namespace EcoBici
         /// <returns>A time interval of set of possible different values. Each of the timespans returned are subject to a probability which varies from station to station.</returns>
         public TimeSpan IA(int e)
         {
-            return new TimeSpan(1000);
+            return new TimeSpan(0,30,0);
         }
 
         /// <summary>
@@ -127,7 +142,7 @@ namespace EcoBici
         private TimeSpan TV(int e, int eD)
         {
             // TODO:
-            return new TimeSpan(1000);
+            return new TimeSpan(0,30,0);
         }
     }
 }
