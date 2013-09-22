@@ -57,6 +57,7 @@
     <Folder Include="EcoBici\Tables" />
     <Folder Include="EcoBici\Views" />
     <Folder Include="EcoBici\Functions" />
+    <Folder Include="EcoBici\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="EcoBici.sql" />
@@ -68,6 +69,7 @@
     <Build Include="EcoBici\Functions\IA.sql" />
     <Build Include="EcoBici\Functions\ED.sql" />
     <Build Include="EcoBici\Tables\Trips.sql" />
+    <Build Include="EcoBici\Stored Procedures\InsertIA.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TripsDataWarehouse.publish.xml" />
