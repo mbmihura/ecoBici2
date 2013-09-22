@@ -35,9 +35,19 @@ namespace EcoBici
             }
         }
 
-        public int ExcuteIA(int estationId)
+        public int ExcuteIA(int idStation)
         {
-            return ExecuteIntFunction("IA", new SqlParameter("@IdEstacion", estationId));
+            return ExecuteIntFunction("IA", new SqlParameter("@IdEstacion", idStation));
+        }
+        public int ExcuteED(int idStation)
+        {
+            return ExecuteIntFunction("ED", new SqlParameter("@IdSDE", idStation));
+        }
+        public int ExcuteTV(int idOriginStation, int idDestinationStation)
+        {
+            var origin = new SqlParameter("@IdOrigen", idOriginStation);
+            var destination = new SqlParameter("@IdDestino", idDestinationStation);
+            return ExecuteIntFunction("TV", origin, destination );
         }
 
         public void Close()
