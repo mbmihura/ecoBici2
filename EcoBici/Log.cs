@@ -13,7 +13,7 @@ namespace EcoBici
         private static int EstimatedAmountSimulatiosTens = 3;
         public static int nState = 0;
         private TimeSpan[][] TC;
-        private TimeSpan tcAnterior;
+        private TimeSpan? tcAnterior = null;
         private TimeSpan t;
 
         public void SetState(TimeSpan[][] tc)
@@ -41,7 +41,7 @@ namespace EcoBici
         {
             Console.WriteLine();
         }
-         public void WriteState(TimeSpan T, int e, TimeSpan[] TPLL, int d, int b)
+         public void WriteState(TimeSpan T, int e, TimeSpan[] TPLL, int d, int b, TimeSpan nuevoTc)
         {
             int lastCol;
             NewLine();
@@ -52,7 +52,7 @@ namespace EcoBici
                 Write(" ");
             }
             //Write("                                                                                                    ");
-            WriteLine("   __Time__  Est  NextTPLL  EstDest  min B  ____TC (a futuro)_____");
+            WriteLine("   __Time__  NextTPLL  Est    Des  min B  ____TC (a futuro)_____");
             StringBuilder s = new StringBuilder(String.Format("{0,"+ EstimatedAmountSimulatiosTens +"}", nState++) + "|"); 
             for (int row = 0; row < TC.Length; row++)
             {
@@ -64,8 +64,8 @@ namespace EcoBici
                 Write(s.ToString());
                 if (row == 0)
                 {
-                    Write("  " + T + "   " + e + "   " + f(TPLL[e]) + "     " + d.ToString() + "       " + b + "    " + f(TC[d][b]) );
-                    Write((this.tcAnterior != null ? " (TC:" + f(this.tcAnterior):" ( T:" + f(this.t)) + ")");
+                    Write("  " + T + "  " + f(TPLL[e]) + "   " + e + "  ->  " + d.ToString() + "     " + b + "    " + f(nuevoTc));
+                    Write((this.tcAnterior.HasValue ? " (TC:" + f(this.tcAnterior.Value):" ( T:" + f(this.t)) + ")");
                 }
                 NewLine();
                 s = new StringBuilder("   |"); 
