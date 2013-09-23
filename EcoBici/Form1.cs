@@ -12,14 +12,16 @@ namespace EcoBici
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private Simulation simulation;
+
+        public Form1(Simulation simulation)
         {
             InitializeComponent();
+            this.simulation = simulation;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
             chart1.Series.Clear();
             var series1 = new System.Windows.Forms.DataVisualization.Charting.Series
             {
@@ -44,7 +46,5 @@ namespace EcoBici
             var f1 = 59894 - (8128 * i) + (262 * i * i) - (1.6 * i * i * i);
             return f1;
         }
-
-   
     }
 }
