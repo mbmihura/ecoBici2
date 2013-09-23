@@ -32,6 +32,7 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.export_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,11 +52,21 @@
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
+            // export_btn
+            // 
+            this.export_btn.Location = new System.Drawing.Point(990, 12);
+            this.export_btn.Name = "export_btn";
+            this.export_btn.Size = new System.Drawing.Size(81, 33);
+            this.export_btn.TabIndex = 1;
+            this.export_btn.Text = "Export";
+            this.export_btn.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 496);
+            this.Controls.Add(this.export_btn);
             this.Controls.Add(this.chart1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -68,6 +79,7 @@
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button export_btn;
     }
 }
 

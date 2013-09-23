@@ -42,7 +42,7 @@ namespace EcoBici
             simulation.Run();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form results = new Form1(simulation);
+            Form resultView = new Form1(simulation);
             Console.WriteLine("OK" + Environment.NewLine);
 
             // Load GUI and Results
@@ -53,7 +53,7 @@ namespace EcoBici
             NativeMethods.FreeConsole();
 
             // Display GUI
-            Application.Run(results);
+            Application.Run(resultView);
         }
     }
 
