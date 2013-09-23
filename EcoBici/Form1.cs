@@ -7,17 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace EcoBici
 {
     public partial class Form1 : Form
     {
-        private Simulation simulation;
+        private ResultSet results;
+        private List<Chart> charts = new List<Chart>();
 
-        public Form1(Simulation simulation)
+
+        public Form1(ResultSet results)
         {
             InitializeComponent();
-            this.simulation = simulation;
+            this.results = results;
+        }
+
+        private void export_btn_Click(object sender, EventArgs e)
+        {
+            foreach (var chart in charts)
+            {
+                chart.Invalidate();
+                chart.SaveImage("C:\\mypic1111.png", System.Drawing.Imaging.ImageFormat.Png);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,5 +58,7 @@ namespace EcoBici
             var f1 = 59894 - (8128 * i) + (262 * i * i) - (1.6 * i * i * i);
             return f1;
         }
+
+        
     }
 }

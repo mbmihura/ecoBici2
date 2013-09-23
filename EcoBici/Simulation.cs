@@ -41,7 +41,7 @@ namespace EcoBici
             dwm = new DataWarehouseManager();
         }
         
-        public void Run()
+        public ResultSet Run()
         {
             TimeSpan T;
             int e;
@@ -93,6 +93,11 @@ namespace EcoBici
             // TODO: calc results.
 
             // TODO: print results.
+            var results = new ResultSet();
+            
+            //TODO Load result set;
+
+            return results;
         }
 
         /// <summary>

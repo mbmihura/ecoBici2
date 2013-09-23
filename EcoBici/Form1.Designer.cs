@@ -50,7 +50,6 @@
             this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(388, 220);
             this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
             // 
             // export_btn
             // 
@@ -60,6 +59,7 @@
             this.export_btn.TabIndex = 1;
             this.export_btn.Text = "Export";
             this.export_btn.UseVisualStyleBackColor = true;
+            this.export_btn.Click += new System.EventHandler(this.export_btn_Click);
             // 
             // Form1
             // 
