@@ -58,6 +58,7 @@
     <Folder Include="EcoBici\Views" />
     <Folder Include="EcoBici\Functions" />
     <Folder Include="EcoBici\Stored Procedures" />
+    <Folder Include="RawData" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="EcoBici.sql" />
@@ -77,5 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="TripsDataWarehouse.publish.xml" />
+    <None Include="RawData\recorrido-bicis-2012.csv" />
   </ItemGroup>
 </Project>
