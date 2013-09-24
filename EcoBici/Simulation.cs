@@ -18,7 +18,7 @@ namespace EcoBici
         int amountOfStations;
         IBikeDistributionStrategy distributionStrategy;
         IIAInitalizeStrategy iAInitStrategy;
-        DataWarehouseManager dwm;
+        IfdpManager fdpManager;
 
         public Simulation(int amountOfBicycles, int amountOfStations, UniformDistribution distributionStrategy, TimeSpan Tf)
             : this(amountOfBicycles, amountOfStations, distributionStrategy, Tf, new TimeSpan(0))
@@ -38,7 +38,7 @@ namespace EcoBici
             TPLL = iAInitStrategy.getSimulationInitialTPLL(amountOfStations, Ti);
             TC = distributionStrategy.Distribute(amountOfStations, amountOfBicycles, Ti, HV);
 
-            dwm = new DataWarehouseManager();
+            fdpManager = new DataWarehouseManager();
         }
         
         public ResultSet Run()
@@ -205,7 +205,7 @@ namespace EcoBici
         /// <returns>A time interval of set of possible different values. Each of the timespans returned are subject to a probability which varies from station to station.</returns>
         public TimeSpan IA(int idStation)
         {
-            return new TimeSpan(0, dwm.ExcuteIA(idStation), 0);
+            return new TimeSpan(0, fdpManager.ExcuteIA(idStation), 0);
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace EcoBici
         /// <returns>A destination station's id of set of possible destination stations for the origin station's id. Each of the destination stations' ids returned are subject to a probability which varies from one origin station to another one.</returns>
         public int ED(int idStation)
         {
-            return dwm.ExcuteED(idStation);
+            return fdpManager.ExcuteED(idStation);
         }
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace EcoBici
         /// <returns>A time interval of the set of possible travel time intervals that a bicycle needed to travel from origin station to the destination station. Each of the time intervals returned are subject to a probability which varies from one pair of origin-destination station to another one.</returns>
         private TimeSpan TV(int idOrigin, int idDestination)
         {
-            return new TimeSpan(0, dwm.ExcuteTV(idOrigin,idDestination), 0);
+            return new TimeSpan(0, fdpManager.ExcuteTV(idOrigin,idDestination), 0);
         }
     }
 }

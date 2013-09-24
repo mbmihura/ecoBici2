@@ -7,7 +7,7 @@ using System.Data;
 
 namespace EcoBici
 {
-    class DataWarehouseManager : IDisposable
+    class DataWarehouseManager : IDisposable, IfdpManager
     {
         private SqlConnection connection; 
         private const string dbSchemaName = "EcoBici";
@@ -15,7 +15,7 @@ namespace EcoBici
         public DataWarehouseManager()
         {
             connection = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["ConnectionString"]);
-            connection.Open();
+            Start();
         }
 
         public int ExecuteIntFunction(string functionName, params SqlParameter[] parameters) {
@@ -49,8 +49,12 @@ namespace EcoBici
             var destination = new SqlParameter("@IdDestino", idDestinationStation);
             return ExecuteIntFunction("TV", origin, destination );
         }
+        public void Start()
+        {
+            connection.Open();
+        }
 
-        public void Close()
+        public void Stop()
         {
             connection.Close();
         }
@@ -58,7 +62,7 @@ namespace EcoBici
         {
             if (connection != null)
             {
-                Close();
+                Stop();
                 connection.Dispose();
             }
         }
