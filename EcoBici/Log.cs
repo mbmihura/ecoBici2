@@ -14,7 +14,7 @@ namespace EcoBici
         public static int nState = 0;
         private TimeSpan[][] TC;
         private TimeSpan? tcAnterior = null;
-        private TimeSpan t;
+        private TimeSpan? t;
 
         public void SetState(TimeSpan[][] tc)
         {
@@ -64,8 +64,10 @@ namespace EcoBici
                 Write(s.ToString());
                 if (row == 0)
                 {
-                    Write("  " + T + "  " + f(TPLL[e]) + "   " + e + "  ->  " + d.ToString() + "     " + b + "    " + f(nuevoTc));
-                    Write((this.tcAnterior.HasValue ? " (TC:" + f(this.tcAnterior.Value):" ( T:" + f(this.t)) + ")");
+                    // TODO: Refactor way in wich this is notified by the simulation
+                    Write("  " + T + "  " + f(TPLL[e]) + "   " + e + "  ->  " + d.ToString() + "     " + b + "    " + (this.tcAnterior.HasValue || this.t.HasValue ? f(nuevoTc) : " NoBike "));
+                    Write((this.tcAnterior.HasValue ? " (TC:" + f(this.tcAnterior.Value): (this.t.HasValue ? " ( T:" + f(this.t.Value) + ")": "-> No trip   ")));
+                    //Write((this.tcAnterior.HasValue ? " (TC:" + f(this.tcAnterior.Value) : " ( T:" + f(this.t) + ")"));
                 }
                 NewLine();
                 s = new StringBuilder("   |"); 
@@ -84,5 +86,7 @@ namespace EcoBici
         }
 
 
+
+        
     }
 }

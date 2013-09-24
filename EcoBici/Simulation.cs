@@ -38,7 +38,7 @@ namespace EcoBici
             TPLL = iAInitStrategy.getSimulationInitialTPLL(amountOfStations, Ti);
             TC = distributionStrategy.Distribute(amountOfStations, amountOfBicycles, Ti, HV);
 
-            fdpManager = new DataWarehouseManager();
+            fdpManager = new MockVA(amountOfStations, 1,120, 60);
         }
         
         public ResultSet Run()
@@ -148,7 +148,7 @@ namespace EcoBici
             var results = new ResultSet();
 
             // % uso de bicicles:
-            results.PUB = SUB.TotalMinutes / (Ti - Tf).TotalMinutes * amountOfBicycles;
+            results.PUB = SUB.TotalMinutes / (Tf - Ti).TotalMinutes * amountOfBicycles;
 
             // 1er momento sin bicis (por estacion):
             results.PMSB = PMSB;
@@ -163,16 +163,17 @@ namespace EcoBici
 
             #region results calculation
             log.WriteLine("");
-            log.WriteLine("Porc uso bicicletas: " + results.PUB);
-            log.WriteLine("Promedio Espera en cola: " + results.PEC);
-            log.WriteLine("1er momento sin bicis (por estacion): ");
+            log.WriteLine("Porcentaje uso bicicletas:            " + results.PUB);
+            log.WriteLine("Promedio Espera en cola:              " + results.PEC);
+            log.WriteLine("");
+            log.Write("1er momento sin bicis (por estacion): ");
             for(int p = 0; p < results.PMSB.Length ; ++p)
-                log.WriteLine(p + ": " + results.PMSB[p]);
-
-            log.WriteLine("Tiempo max. espera (por estacion): ");
+                log.WriteLine((p == 0 ? "" : "                                      ") + p + ": " + (results.PMSB[p] >= HV ? "   HV" : results.PMSB[p].ToString()));
+            log.WriteLine("");
+            log.Write("Tiempo max. espera (por estacion):    ");
             for (int p = 0; p < results.TMEC.Length; ++p)
-                log.WriteLine(p + ": " + results.TMEC[p]);
-
+                log.WriteLine((p == 0? "":"                                      ") + p + ": " + results.TMEC[p]);
+           // log.simulationDump("C:/" );
             #endregion
 
             return results;
