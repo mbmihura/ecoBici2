@@ -41,7 +41,7 @@ namespace EcoBici
             dwm = new DataWarehouseManager();
         }
         
-        public void Run()
+        public ResultSet Run()
         {
             TimeSpan T;
             int e;
@@ -145,23 +145,37 @@ namespace EcoBici
             } while ( T < Tf);
 
             #region results calculation
+            var results = new ResultSet();
 
-            // % uso de bicicles
-            TimeSpan PUB = TimeSpan.FromMinutes(SUB.TotalMinutes / (Ti - Tf).TotalMinutes * amountOfBicycles);
+            // % uso de bicicles:
+            results.PUB = SUB.TotalMinutes / (Ti - Tf).TotalMinutes * amountOfBicycles;
 
-            // 1er momento sin bicis (por estacion)
-            PMSB.Min();
+            // 1er momento sin bicis (por estacion):
+            results.PMSB = PMSB;
 
-            // Promedio Espera en cola
-            TimeSpan PEC = TimeSpan.FromMinutes(SEC.TotalMinutes / TPS);
+            // Promedio Espera en cola:
+            results.PEC = TimeSpan.FromMinutes(SEC.TotalMinutes / TPS);
 
-            // Tiempo max. espera (por estacion)
-            TMEC.Max();
+            // Tiempo max. espera (por estacion):
+            results.TMEC = TMEC;
+
             #endregion
 
             #region results calculation
-                // TODO: print results.
+            log.WriteLine("");
+            log.WriteLine("Porc uso bicicletas: " + results.PUB);
+            log.WriteLine("Promedio Espera en cola: " + results.PEC);
+            log.WriteLine("1er momento sin bicis (por estacion): ");
+            for(int p = 0; p < results.PMSB.Length ; ++p)
+                log.WriteLine(p + ": " + results.PMSB[p]);
+
+            log.WriteLine("Tiempo max. espera (por estacion): ");
+            for (int p = 0; p < results.TMEC.Length; ++p)
+                log.WriteLine(p + ": " + results.TMEC[p]);
+
             #endregion
+
+            return results;
         }
 
         /// <summary>

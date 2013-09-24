@@ -39,21 +39,22 @@ namespace EcoBici
 
             // Run simulation
             Console.Write("Running simulation...");
-            simulation.Run();
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Form results = new Form1(simulation);
+            ResultSet rset = simulation.Run();
             Console.WriteLine("OK" + Environment.NewLine);
+
 
             // Load GUI and Results
             Console.Write("Loading GUI and Results...");
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Form resultView = new Form1(rset);
 
             // Deallocate Console
             Console.Write("Exiting command interface...");
             NativeMethods.FreeConsole();
 
             // Display GUI
-            Application.Run(results);
+            Application.Run(resultView);
         }
     }
 
