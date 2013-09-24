@@ -47,8 +47,16 @@ namespace EcoBici
             int e;
             int d;
             int b;
-            TimeSpan tc;
+            TimeSpan minTC;
             TimeSpan tv;
+            TimeSpan espera;
+            int TPS = 0;
+            TimeSpan SUB = new TimeSpan(0);
+            TimeSpan SEC = new TimeSpan(0);
+            TimeSpan[] TMEC = new TimeSpan[amountOfStations];
+            TimeSpan[] PMSB = new TimeSpan[amountOfStations];
+            for (int p = 0; p < PMSB.Length; ++p)
+                PMSB[p] = HV;
 
             Log.HV = this.HV;
             Log.BikesAmount = this.amountOfBicycles;
@@ -57,42 +65,103 @@ namespace EcoBici
             do
             {
                 log = new Log();
-
-                e = min(TPLL);
                 log.SetState(TC);
+
+                // Move Time to the next arrival to be process
+                e = min(TPLL);
                 T = TPLL[e];
 
-                
-
+                // Set next arrival for current station
                 TPLL[e] = T + IA(e);
 
+                // Calcula trips destination and duration.
                 d = ED(e);
                 tv = TV(e, d);
-
-
-
+                
+                // Serch sooner available bike
                 b = min(TC[e]);
-                tc = TC[e][b];
+                minTC = TC[e][b];
 
+                // Mark bike as used in origin station
                 TC[e][b] = HV;
-                if (T < tc)
+
+                if (T < minTC)
                 {
-                    // No more bikes.
-                    TC[d][b] = tc + tv;
-                    log.SetTCAnt(tc);
+                    // NO Bikes available now...
+                    if (minTC < HV)
+                    {
+                        // No more bikes at the moments... (wait + trip)
+
+                        // Set bike's new commitment time in destination station
+                        TC[d][b] = minTC + tv;
+                        log.SetTCAnt(minTC);
+
+                        // Add wait to system's accumulated wait
+                        espera = minTC - T;
+                        SEC = SEC + espera;
+
+                        // Save maximum wait
+                        if (TMEC[e] < espera)
+                            TMEC[e] = espera;
+
+                        // Save first moment without bikes
+                        if (PMSB[e] == HV)
+                            PMSB[e] = T;
+
+                        // Add travel time to system's accumulated travel time
+                        SUB = SUB + tv;
+                    } 
+                    else
+                    {
+                        // No bikes until end of day... (wait)
+
+                        // Add wait to system's accumulated wait
+                        espera = (Tf - T);
+                        SEC = SEC + espera;
+
+                        // Save maximum wait
+                        if (TMEC[e] < espera)
+                            TMEC[e] = espera;
+
+                        // Save first moment without bikes
+                        if (PMSB[e] == HV)
+                            PMSB[e] = T;
+                    }
                 }
                 else {
-                    // Bike available
+                    // Bike available now... (trip)
+
+                    // Set bike's new commitment time in destination station
                     TC[d][b] = T + tv;
                     log.SetT(T);
+
+                    // Add travel time to system's accumulated travel time
+                    SUB = SUB + tv;
                 }
-
-                log.WriteState(T, e, TPLL, d, b);
+                // Add process person to person count.
+                TPS = TPS + 1;
+                
+                log.WriteState(T, e, TPLL, d, b, TC[d][b]);
             } while ( T < Tf);
-            
-            // TODO: calc results.
 
-            // TODO: print results.
+            #region results calculation
+
+            // % uso de bicicles
+            TimeSpan PUB = TimeSpan.FromMinutes(SUB.TotalMinutes / (Ti - Tf).TotalMinutes * amountOfBicycles);
+
+            // 1er momento sin bicis (por estacion)
+            PMSB.Min();
+
+            // Promedio Espera en cola
+            TimeSpan PEC = TimeSpan.FromMinutes(SEC.TotalMinutes / TPS);
+
+            // Tiempo max. espera (por estacion)
+            TMEC.Max();
+            #endregion
+
+            #region results calculation
+                // TODO: print results.
+            #endregion
         }
 
         /// <summary>
