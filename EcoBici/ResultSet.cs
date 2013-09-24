@@ -7,6 +7,12 @@ namespace EcoBici
 {
     public class ResultSet
     {
+        public ResultSet()
+        {
+            SUB = new List<TimeSpan>();
+            SEC = new List<TimeSpan>();
+        }
+
         /// <summary>Porcentaje de uso total de las bicicletas del sistema.</summary>
         public double PUB {set; get;}
 
@@ -18,5 +24,11 @@ namespace EcoBici
 
         /// <summary> Tiempo maximo espera en cola (por estacion).<summary>
         public TimeSpan[] TMEC { get; set; }
+
+        /// <summary> Tiempo maximo espera en cola (por estacion).<summary>
+        public List<TimeSpan> SUB { get; set; }
+
+        /// <summary> Tiempo maximo espera en cola (por estacion).<summary>
+        public List<TimeSpan> SEC { get; set; }
     }
 }

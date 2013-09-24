@@ -62,6 +62,8 @@ namespace EcoBici
             Log.BikesAmount = this.amountOfBicycles;
             Log.setColumnNumbers();
             Log log;
+            var results = new ResultSet();
+
             do
             {
                 log = new Log();
@@ -142,10 +144,12 @@ namespace EcoBici
                 TPS = TPS + 1;
                 
                 log.WriteState(T, e, TPLL, d, b, TC[d][b]);
+                results.SUB.Add(SUB);
+                results.SEC.Add(SEC);
             } while ( T < Tf);
 
             #region results calculation
-            var results = new ResultSet();
+            
 
             // % uso de bicicles:
             results.PUB = SUB.TotalMinutes / (Tf - Ti).TotalMinutes * amountOfBicycles;
@@ -173,9 +177,16 @@ namespace EcoBici
             log.Write("Tiempo max. espera (por estacion):    ");
             for (int p = 0; p < results.TMEC.Length; ++p)
                 log.WriteLine((p == 0? "":"                                      ") + p + ": " + results.TMEC[p]);
-           // log.simulationDump("C:/" );
+
+            log.WriteLine("Estados __SUB___  __SEC___ ");
+            for (int p = 0; p < results.SUB.Count; ++p)
+                log.WriteLine("   " + p + "    " + results.SUB[p] + "  " + results.SEC[p]);
+
             #endregion
 
+            Console.Write("Press enter twice to exit.");
+            Console.ReadLine();
+            Console.ReadLine();
             return results;
         }
 
