@@ -42,12 +42,35 @@ namespace EcoBici
             ResultSet rset = simulation.Run();
             Console.WriteLine("OK" + Environment.NewLine);
 
+            // Wurite results to file
+            Console.Write("Writing results to csv file....");
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.Configuration.ConfigurationManager.AppSettings["csvFilePath"] + "Simulation Result " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".txt"))
+            {
+                file.WriteLine("ECOBICI BA SIMULATION");
+                file.WriteLine("Run at " + DateTime.Now.ToString());
+                file.WriteLine("---------------------------------------------------------");
+
+                file.WriteLine("Porcentaje uso bicicletas," + rset.PUB);
+                file.WriteLine("Promedio Espera en cola," + rset.PEC);
+                file.WriteLine("1er momento sin bicis (por estacion)");
+                for (int p = 0; p < rset.PMSB.Length; ++p)
+                    file.WriteLine(p +"," + rset.PMSB[p].ToString());
+                file.WriteLine("Tiempo max. espera (por estacion)");
+                for (int p = 0; p < rset.TMEC.Length; ++p)
+                    file.WriteLine(p + "," + rset.TMEC[p]);
+
+                file.WriteLine("Estados,SUB,SEC");
+                for (int p = 0; p < rset.SUB.Count; ++p)
+                    file.WriteLine(p+ "," + rset.SUB[p] + "," + rset.SEC[p]);
+            }
+            Console.WriteLine("OK" + Environment.NewLine);
 
             // Load GUI and Results
             Console.Write("Loading GUI and Results...");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Form resultView = new Form1(rset);
+            Console.WriteLine("OK" + Environment.NewLine);
 
             // Deallocate Console
             Console.Write("Exiting command interface...");
