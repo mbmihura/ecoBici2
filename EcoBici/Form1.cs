@@ -51,7 +51,7 @@ namespace EcoBici
                 series1.Points.AddXY(i, f(i));
             }
             chart1.Invalidate();
-            chart1.SaveImage("C:\\mypic.png", System.Drawing.Imaging.ImageFormat.Png);
+            chart1.SaveImage(@"C:\Users\Martín\Desktop\myresult.png", System.Drawing.Imaging.ImageFormat.Png);
         }
         private double f(int i)
         {
