@@ -152,7 +152,7 @@ namespace EcoBici
             
 
             // % uso de bicicles:
-            results.PUB = SUB.TotalMinutes / (Tf - Ti).TotalMinutes * amountOfBicycles;
+            results.PUB = SUB.TotalMinutes / ((Tf - Ti).TotalMinutes * amountOfBicycles);
 
             // 1er momento sin bicis (por estacion):
             results.PMSB = PMSB;
