@@ -9,8 +9,8 @@ namespace EcoBici
     {
         public ResultSet()
         {
-            SUB = new List<TimeSpan>();
-            SEC = new List<TimeSpan>();
+            SUB = new List<Tuple<TimeSpan,TimeSpan>>();
+            SEC = new List<Tuple<TimeSpan,TimeSpan>>();
         }
 
         /// <summary>Porcentaje de uso total de las bicicletas del sistema.</summary>
@@ -26,9 +26,9 @@ namespace EcoBici
         public TimeSpan[] TMEC { get; set; }
 
         /// <summary> Tiempo maximo espera en cola (por estacion).<summary>
-        public List<TimeSpan> SUB { get; set; }
+        public List<Tuple<TimeSpan,TimeSpan>> SUB { get; set; }
 
         /// <summary> Tiempo maximo espera en cola (por estacion).<summary>
-        public List<TimeSpan> SEC { get; set; }
+        public List<Tuple<TimeSpan, TimeSpan>> SEC { get; set; }
     }
 }

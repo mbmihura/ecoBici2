@@ -38,7 +38,8 @@ namespace EcoBici
             TPLL = iAInitStrategy.getSimulationInitialTPLL(amountOfStations, Ti);
             TC = distributionStrategy.Distribute(amountOfStations, amountOfBicycles, Ti, HV);
 
-            fdpManager = new MockVA(amountOfStations, 1,120, 60);
+            //fdpManager = new MockVA(amountOfStations, 1,120, 60);
+            fdpManager = new DataWarehouseManager();
         }
         
         public ResultSet Run()
@@ -144,8 +145,8 @@ namespace EcoBici
                 TPS = TPS + 1;
                 
                 log.WriteState(T, e, TPLL, d, b, TC[d][b]);
-                results.SUB.Add(SUB);
-                results.SEC.Add(SEC);
+                results.SUB.Add(new Tuple<TimeSpan,TimeSpan>(T,SUB));
+                results.SEC.Add(new Tuple<TimeSpan,TimeSpan>(T,SEC));
             } while ( T < Tf);
 
             #region results calculation
@@ -180,7 +181,7 @@ namespace EcoBici
 
             log.WriteLine("Estados __SUB___  __SEC___ ");
             for (int p = 0; p < results.SUB.Count; ++p)
-                log.WriteLine("   " + p + "    " + results.SUB[p] + "  " + results.SEC[p]);
+                log.WriteLine("   " + p + "    " + results.SUB[p].Item2 + "  " + results.SEC[p].Item2);
 
             #endregion
 

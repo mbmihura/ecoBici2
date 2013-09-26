@@ -34,7 +34,7 @@ namespace EcoBici
             Console.Write("Creating simulation...");
             var Ti = new TimeSpan(0);
             var Tf = new TimeSpan(4, 0, 0);
-            Simulation simulation = new Simulation(b, 3, new UniformDistribution(), Tf, Ti);
+            Simulation simulation = new Simulation(b, 28, new UniformDistribution(), Tf, Ti);
             Console.WriteLine("OK" + Environment.NewLine);
 
             // Run simulation
@@ -44,12 +44,13 @@ namespace EcoBici
 
             // Wurite results to file
             Console.Write("Writing results to csv file....");
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.Configuration.ConfigurationManager.AppSettings["csvFilePath"] + "Simulation Result " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".txt"))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.Configuration.ConfigurationManager.AppSettings["csvFilePath"] + "Simulation Result " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".csv"))
             {
                 file.WriteLine("ECOBICI BA SIMULATION");
                 file.WriteLine("Run at " + DateTime.Now.ToString());
                 file.WriteLine("---------------------------------------------------------");
 
+                file.WriteLine("Bikes Amount," + b);
                 file.WriteLine("Porcentaje uso bicicletas," + rset.PUB);
                 file.WriteLine("Promedio Espera en cola," + rset.PEC);
                 file.WriteLine("1er momento sin bicis (por estacion)");
@@ -59,9 +60,9 @@ namespace EcoBici
                 for (int p = 0; p < rset.TMEC.Length; ++p)
                     file.WriteLine(p + "," + rset.TMEC[p]);
 
-                file.WriteLine("Estados,SUB,SEC");
+                file.WriteLine("Estados,Time,SUB,Time,SEC");
                 for (int p = 0; p < rset.SUB.Count; ++p)
-                    file.WriteLine(p+ "," + rset.SUB[p] + "," + rset.SEC[p]);
+                    file.WriteLine(p + "," + rset.SUB[p].Item1 + "," + rset.SUB[p].Item2 + "," + rset.SEC[p].Item2);
             }
             Console.WriteLine("OK" + Environment.NewLine);
 
