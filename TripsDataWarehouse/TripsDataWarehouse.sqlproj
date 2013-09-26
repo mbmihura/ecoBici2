@@ -76,6 +76,7 @@
     <Build Include="EcoBici\Stored Procedures\GenerateFDPs.sql" />
     <Build Include="EcoBici\Stored Procedures\LoadTripsFromCSVFile.sql" />
     <Build Include="EcoBici\Stored Procedures\Modificar_ids_Tablas.sql" />
+    <Build Include="EcoBici\Stored Procedures\LimpiarViajesErroneos.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TripsDataWarehouse.publish.xml" />
