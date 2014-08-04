@@ -26,7 +26,7 @@ BEGIN
 	WHILE (@@FETCH_STATUS = 0)
 		BEGIN
 			IF ((@estacion_origen_anterior <> @estacion_origen) or (@estacion_destino_anterior <> @estacion_destino))
-				SET @id_random = 1
+				SET @id_random = 0
 						
 			INSERT INTO [EcoBici].[TVTable]
 					(ID_Random,IdEstacionOrigen,IdEstacionDestino,TiempoDeViaje)	

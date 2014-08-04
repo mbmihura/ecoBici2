@@ -38,8 +38,8 @@ namespace EcoBici
             TPLL = iAInitStrategy.getSimulationInitialTPLL(amountOfStations, Ti);
             TC = distributionStrategy.Distribute(amountOfStations, amountOfBicycles, Ti, HV);
 
-            //fdpManager = new MockVA(amountOfStations, 1,120, 60);
-            fdpManager = new DataWarehouseManager();
+            fdpManager = new MockVA(amountOfStations, 1,120, 60);
+            //fdpManager = new DataWarehouseManager();
         }
         
         public ResultSet Run()
@@ -61,7 +61,7 @@ namespace EcoBici
 
             Log.HV = this.HV;
             Log.BikesAmount = this.amountOfBicycles;
-            Log.setColumnNumbers();
+           // Log.setColumnNumbers();
             Log log;
             var results = new ResultSet();
 

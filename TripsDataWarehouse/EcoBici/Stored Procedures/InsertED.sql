@@ -24,7 +24,7 @@ BEGIN
 	WHILE (@@FETCH_STATUS = 0)
 		BEGIN
 			IF (@estacion_origen_anterior <> @estacion_origen)
-				SET @id_random = 1
+				SET @id_random = 0
 								
 			INSERT INTO [EcoBici].[EDTable] 
 					(ID_Random,IdEstacionOrigen,IdEstacionDestino)

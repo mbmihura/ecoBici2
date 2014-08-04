@@ -33,8 +33,8 @@ namespace EcoBici
             // Create simulation
             Console.Write("Creating simulation...");
             var Ti = new TimeSpan(0);
-            var Tf = new TimeSpan(4, 0, 0);
-            Simulation simulation = new Simulation(b, 28, new UniformDistribution(), Tf, Ti);
+            var Tf = new TimeSpan(12, 0, 0);
+            Simulation simulation = new Simulation(b, 5, new UniformDistribution(), Tf, Ti);
             Console.WriteLine("OK" + Environment.NewLine);
 
             // Run simulation

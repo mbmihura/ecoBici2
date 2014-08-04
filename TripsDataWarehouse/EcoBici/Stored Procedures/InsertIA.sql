@@ -29,7 +29,7 @@ BEGIN
 		BEGIN
 			IF (@estacion_origen_anterior <> @estacion_origen)
 				BEGIN
-					SET @id_random = 1
+					SET @id_random = 0
 					SET @fecha_salida_anterior = '2008-01-01'
 				END			
 			IF DATEDIFF(DAY,@fecha_salida_anterior,@fecha_salida) = 0 
